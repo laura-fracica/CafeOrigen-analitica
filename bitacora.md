@@ -85,3 +85,23 @@ Probadas con tres entradas: arreglo completo (12), un solo elemento y arreglo va
 | `totalPorCiudad` | todas las ventas | las de `cantidad > 0` | nada | dinero de cada ciudad | objeto con la ciudad normalizada como clave |
 | `unidadesPorProducto` | todas las ventas | las de `cantidad > 0` | nada | unidades de cada producto | objeto con el producto como clave |
 | `topProductosPorValor` | las ventas, luego las entradas del objeto | las de `cantidad > 0` | cada `[producto, valor]` en solo el nombre | dinero de cada producto | objeto con el producto como clave; luego ordeno y tomo los k primeros |
+
+## Registro de depuración (MiniReto 4)
+
+### Error 1: una ciudad aparece dos veces
+- **Síntoma:** en ventas por ciudad, la misma ciudad salía en dos filas.
+- **Entrada que lo produce:** ciudades escritas distinto, como `"Bogotá"` y `"Bogotá "` (con espacio). En la muestra pasa con `"Medellín"` y `"medellín "`.
+- **Hipótesis:** el objeto usa la ciudad tal cual como clave, y para JavaScript `"Bogotá"` y `"Bogotá "` son claves distintas.
+- **Prueba realizada:** probé una versión sin normalizar (`depuracion.js`). Con la muestra salieron 5 grupos en vez de 4.
+- **Causa:** no se normalizaba el nombre antes de agrupar.
+- **Corrección:** `totalPorCiudad` usa `venta.ciudad.trim().toLowerCase()` como clave. Ahora salen 4 ciudades, y la entrada de Bogotá da 1 solo grupo.
+
+### Error 2: el ticket promedio da NaN
+- **Síntoma:** al filtrar un día sin ventas, el ticket promedio mostraba `NaN`.
+- **Entrada que lo produce:** un arreglo vacío, como `ventasDelDia(ventas, "2026-09-07")`.
+- **Hipótesis:** se divide entre 0, y `0 / 0` da `NaN` en JavaScript.
+- **Prueba realizada:** la versión sin validación devolvió `NaN` con el arreglo vacío.
+- **Causa:** la función dividía sin revisar si había ventas.
+- **Corrección:** en `ticketPromedio`, si el contador es 0 devuelve 0 antes de dividir.
+
+Mi versión ya no tiene ninguno de los dos errores: lo demuestran las pruebas de `depuracion.js`.

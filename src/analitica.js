@@ -112,17 +112,10 @@ function topProductosPorValor(ventas, k) {
     .map(([producto]) => producto);
 }
 
+function ventasDelDia(ventas, fecha) {
+  return ventas.filter((venta) => venta.cantidad > 0 && venta.fecha === fecha.trim());
+}
+
 module.exports = {
-  valorVenta,
-  totalVendido,
-  unidadesVendidas,
-  ventaMayor,
-  ticketPromedio,
-  ventasPorCiudad,
-  totalVendidoM,
-  unidadesVendidasM,
-  ventasPorCiudadM,
-  totalPorCiudad,
-  unidadesPorProducto,
-  topProductosPorValor,
+  valorVenta,totalVendido,unidadesVendidas,ventaMayor,ticketPromedio,ventasPorCiudad,totalVendidoM,unidadesVendidasM,ventasPorCiudadM,totalPorCiudad,unidadesPorProducto,topProductosPorValor,ventasDelDia,
 };
