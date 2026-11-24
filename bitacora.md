@@ -73,3 +73,15 @@ para cada
 | `ventasPorCiudad` | `0` | No hay ventas en esa ciudad. |
 
 Probadas con tres entradas: arreglo completo (12), un solo elemento y arreglo vacío.
+
+
+## Las cinco preguntas por función (MiniReto 3)
+
+| Función | ¿Qué recorro? | ¿Qué filtro? | ¿Qué transformo? | ¿Qué acumulo? | ¿Cómo agrupo? |
+| :------ | :------------ | :----------- | :--------------- | :------------ | :------------ |
+| `totalVendidoM` | todas las ventas | las de `cantidad > 0` | cada venta en su valor (`map`) | suma de valores | no agrupo |
+| `unidadesVendidasM` | todas las ventas | las de `cantidad > 0` | nada | suma de `cantidad` | no agrupo |
+| `ventasPorCiudadM` | todas las ventas | válidas y de esa ciudad | cada venta en su valor | suma de valores | no agrupo |
+| `totalPorCiudad` | todas las ventas | las de `cantidad > 0` | nada | dinero de cada ciudad | objeto con la ciudad normalizada como clave |
+| `unidadesPorProducto` | todas las ventas | las de `cantidad > 0` | nada | unidades de cada producto | objeto con el producto como clave |
+| `topProductosPorValor` | las ventas, luego las entradas del objeto | las de `cantidad > 0` | cada `[producto, valor]` en solo el nombre | dinero de cada producto | objeto con el producto como clave; luego ordeno y tomo los k primeros |
